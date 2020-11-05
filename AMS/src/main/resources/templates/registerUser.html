@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register User</title>
+<script type="text/javascript">
+	function validate() {
+		var password = document.myForm.password.value;
+		var repassword = document.myForm.repassword.value;
+
+		if (password == null || password == "") {
+			alert("Passwords cannot be empty... ");
+			document.myForm.password.focus();
+			return false;
+		}
+
+		if (password != repassword) {
+			//alert("Passwords Do not match");
+			alert("Passwords not matching! Ensure the passwords matches... ");
+			document.myForm.password.focus();
+			return false;
+		}
+		return true;
+
+	}
+</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body bgcolor="#F8F9F9">
+
+	<!-- <form>
+			<div class="page-title" align="Center">Account Management
+				System</div> -->
+
+	<div class="main">
+
+		<form action="#" name="myForm" onsubmit="return validate();"
+			th:action="@{/saveUser}" th:object="${user}" method="post">
+			<div style="color: red;" th:if="${#fields.hasErrors('*')}">
+				<p>
+					<strong>Errors</strong>
+				</p>
+				<ul>
+					<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+				</ul>
+			</div>
+
+			<div class="page-title" align="Center">Account Management System</div>
+			<br> <br> <img src="../ams.jpeg" alt="ams icon" width="192"
+				height="185"><br> <br>
+				
+			<div align="Center">
+				<h4>Please provide following details to set up a new account</h4>
+			</div>
+
+			<table cellpadding="10" align="center">
+
+				<tr>
+					<td>First Name</td>
+					<td><input type="text" id="firstName" name="fname" required="required" th:field="*{firstName}"/></td>
+				</tr>
+
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text"  name="lastName"	required="required" th:field="*{lastName}" /></td>
+				</tr>
+				<tr>
+					<td>Email Id</td>
+					<td><input type="text" name="emailId"
+						required="required" th:field="*{email}" /></td>
+				</tr>
+				<tr>
+					<td>User Name</td>
+					<td><input type="text" name="userName"
+						required="required" th:field="*{userName}" /></td>
+				</tr>
+
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="Password" required="required" th:field="*{password}" /></td>
+				</tr>
+
+				<tr>
+					<td>Confirm Password</td>
+					<td><input type="password" name="Password" required="required" /></td>
+				</tr>
+			</table>
+			<br>
+			<div class="container" align="Center">
+				<button class="w3-green" type="submit">Sign up</button>
+			</div>
+			<footer class="footer fixed-bottom"
+				style="padding: 8px 16px; margin: 16px 0px 0px;">
+				<br> <br> <br> <br>
+				<div align="Center" class="copyright">&copy; 2020 - AN 'N YA</div>
+			</footer>
+		</form>
+	</div>
+</body>
+</html>

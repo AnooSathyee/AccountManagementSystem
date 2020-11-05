@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Form Validation</title>
+<script type="text/javascript">
+	function validate() {
+		var password = document.myForm.password.value;
+		var repassword = document.myForm.repassword.value;
+
+		if (password == null || password == "") {
+			alert("Passwords cannot be empty... ");
+			document.myForm.password.focus();
+			return false;
+		}
+
+		if (password != repassword) {
+			//alert("Passwords Do not match");
+			alert("Passwords not matching! Ensure the passwords matches... ");
+			document.myForm.password.focus();
+			return false;
+		}
+		return true;
+
+	}
+</script>
+<link rel="stylesheet" href="../user.css">
+<!-- 
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.page-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+</style>
+-->
+</head>
+
+<body bgcolor="#F8F9F9">
+
+	<form action="#" name="myForm" onsubmit="return validate();" th:action="@{/save}" th:object="${user}" method="post">
+
+		<div style="color: red;" th:if="${#fields.hasErrors('*')}">
+			<p>
+				<strong>Errors</strong>
+			</p>
+			<ul>
+				<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+			</ul>
+		</div>
+		
+		<div class="page-title" align="Center">Account Management System</div>
+			<br> <br> <img src="../ams.jpeg" alt="ams icon" width="192"
+				height="185" align="middle"><br> <br>
+				
+			<div align="Center">
+				<h4>Please provide following details to set up a new account</h4>
+			</div>
+
+		<table cellspacing="2" cellpadding="2" border="1" align="center">
+		
+			<tr>
+				<td align="right">First Name</td>
+				<td><input type="text" name="firstName" th:field="*{firstName}" /></td>
+			</tr>			
+			<tr>
+				<td align="right">Last Name</td>
+				<td><input type="text" name="lastName" th:field="*{lastName}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Email</td>
+				<td><input type="text" name="email" th:field="*{email}" /></td>
+			</tr>
+			<tr>
+				<td align="right">User Name</td>
+				<td><input type="text" name="userName" th:field="*{userName}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Password</td>
+				<td><input type="text" name="password" th:field="*{password}" /></td>
+			</tr>
+
+			<tr>
+				<td align="right">Confirm Password</td>
+				<td><input type="text" name="repassword" /></td>
+			</tr>
+
+			<tr>
+				<td align="right"></td>
+				<td><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Form Validation</title>
+<script type="text/javascript">
+	function validate() {
+		var password = document.myForm.password.value;
+		var repassword = document.myForm.repassword.value;
+
+		if (password != repassword) {
+			alert("Passwords not matching! Ensure the passwords matches... ");
+			document.myForm.password.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+
+	<div align="center">
+		<h1>Create new Product</h1>
+		<form action="#"  onsubmit="return(validate());" th:action="@{/save}" th:object="${user}"
+			 method="post">
+
+
+			<!-- <form action="/action" name="myForm" onsubmit="return(validate());"> -->
+<!-- <table cellspacing="2" cellpadding="2" border="1">
+
+
+				<tr>
+					<td align="right">UserName</td>
+					<td><input type="text" th:field="*{name}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Email</td>
+					<td><input type="text" th:field="*{email}" /></td>
+				</tr>
+
+				<tr>
+					<td align="right">Password</td>
+					<td><input type="text" th:field="*{password}" /></td>
+				</tr>
+
+				<tr>
+					<td align="right">Reenter Password</td>
+					<td><input type="text" th:field="*{rePassword}" /></td>
+				</tr>
+				
+				<!-- <button type="button" onclick="myFunction()">Sumbit</button>
+				<td><input type="submit" value="Submit" /></td> -->
+
+<!-- <tr>
+					<td align="right"></td>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+
+			</table>
+		</form>
+</body>
+</html>
+
+-->
